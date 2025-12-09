@@ -136,16 +136,15 @@
         <div class="mt-5">
             <h2 class="map-title">Lokasi Sekolah</h2>
 
-                <div class="map-container shadow rounded" style="overflow:hidden; height:400px;">
+                <div class="map-container shadow rounded" style="overflow:hidden; height:450px;">
                     <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4761.06187260354!2d106.83085887575108!3d-6.286012393702911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f21106b16e67%3A0xc0ca83489c187583!2sSMA%20NEGERI%2028%20Jakarta!5e1!3m2!1sid!2sid!4v1765274557741!5m2!1sid!2sid"
                         width="100%" 
                         height="100%" 
-                        frameborder="0" 
-                        style="border:0;"
-                        allowfullscreen
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.465234567!2d106.8156789!3d-6.3003456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ee38e2a4f7e9%3A0x3a9e3b3e5a8b7c6d!2sSMA%20Negeri%2028%20Jakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid">
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
             </div>

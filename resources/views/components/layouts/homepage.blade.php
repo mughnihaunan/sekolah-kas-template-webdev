@@ -16,24 +16,47 @@
             box-sizing: border-box;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Navbar Modern */
+        /* Navbar Modern Enhanced */
         .navbar-modern {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             padding: 15px 0;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1000;
         }
 
         .navbar-modern.scrolled {
             padding: 10px 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.98);
         }
 
         .navbar-modern .logo-container {
@@ -46,6 +69,11 @@
             width: 50px;
             height: 50px;
             object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar-modern .logo-container:hover .logo-img {
+            transform: rotate(360deg) scale(1.1);
         }
 
         .navbar-modern .school-name {
@@ -53,6 +81,11 @@
             font-weight: 700;
             color: #1a1a1a;
             line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-modern .logo-container:hover .school-name {
+            color: #2563eb;
         }
 
         .navbar-modern .school-name small {
@@ -66,8 +99,26 @@
             color: #333;
             font-weight: 500;
             padding: 8px 20px !important;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
+        }
+
+        .navbar-modern .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .navbar-modern .nav-link:hover::before {
+            transform: translateY(0);
         }
 
         .navbar-modern .nav-link::after {
@@ -77,42 +128,70 @@
             left: 50%;
             transform: translateX(-50%);
             width: 0;
-            height: 2px;
-            background: #2563eb;
-            transition: width 0.3s ease;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 10px;
         }
 
         .navbar-modern .nav-link:hover::after,
         .navbar-modern .nav-link.active::after {
-            width: 60%;
+            width: 70%;
         }
 
         .navbar-modern .nav-link:hover {
             color: #2563eb;
+            transform: translateY(-2px);
         }
 
         .btn-login-modern {
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
             color: white;
-            padding: 10px 30px;
+            padding: 12px 35px;
             border-radius: 30px;
             border: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-login-modern::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-login-modern:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-login-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
             color: white;
         }
 
-        /* Hero Slider */
+        .btn-login-modern:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Hero Slider Enhanced */
         .hero-slider {
-            height: 85vh;
+            height: 90vh;
             position: relative;
             margin-top: 0;
             width: 100%;
+            overflow: hidden;
         }
 
         .heroSwiper {
@@ -134,6 +213,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: brightness(0.55);
+            transition: transform 8s ease-out;
+            transform: scale(1);
+            will-change: transform;
+        }
+
+        .swiper-slide-active .slide-background {
+            transform: scale(1.08);
             filter: brightness(0.6);
         }
 
@@ -148,19 +235,35 @@
             max-width: 1000px;
             z-index: 10;
             padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .swiper-slide-active .slide-content {
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.3s;
         }
 
         .slide-content h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-            animation: fadeInDown 1s ease;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
+            letter-spacing: -1px;
+            line-height: 1.2;
         }
 
         .slide-content p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 35px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
             animation: fadeInUp 1s ease 0.3s both;
         }
@@ -303,7 +406,7 @@
             color: #94a3b8;
         }
 
-        /* Dark Mode Toggle */
+        /* Dark Mode Toggle - Simple & Clean */
         .theme-switch {
             position: fixed;
             bottom: 30px;
@@ -319,14 +422,27 @@
             color: white;
             border: none;
             font-size: 1.5rem;
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .theme-switch-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .theme-switch-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .theme-switch-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .theme-switch-btn:hover i {
+            transform: rotate(20deg) scale(1.1);
         }
 
         /* Dark Mode Styles */
@@ -554,14 +670,41 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <script>
-        // Hero Slider
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and items
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.stat-item, .feature-item, .quick-link, .section-heading');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(el);
+            });
+        });
+
+        // Hero Slider with enhanced animations
         const heroSwiper = new Swiper('.heroSwiper', {
             loop: true,
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
+                waitForTransition: true,
             },
-            speed: 1000,
+            speed: 800,
             effect: 'fade',
             fadeEffect: {
                 crossFade: true
@@ -569,11 +712,24 @@
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '" style="background: rgba(255,255,255,0.5); width: 12px; height: 12px; margin: 0 6px;"></span>';
+                },
             },
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            on: {
+                init: function () {
+                    // Pastikan slide pertama langsung visible
+                    this.slides.forEach((slide, index) => {
+                        if (index === this.activeIndex) {
+                            slide.style.opacity = '1';
+                        }
+                    });
+                }
+            }
         });
 
         // Navbar scroll effect
