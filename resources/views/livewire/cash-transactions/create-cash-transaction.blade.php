@@ -91,8 +91,12 @@
 
             {{-- UPLOAD BUKTI --}}
             <div class="mt-3">
-              <label class="form-label">Upload Bukti Pembayaran</label>
-              <input type="file" class="form-control" wire:model="form.proof_file">
+              <label class="form-label">Upload Bukti Pembayaran (JPG, PNG, PDF - Max 2MB)</label>
+              <input type="file" class="form-control" wire:model="form.proof_file" accept=".jpg,.jpeg,.png,.pdf">
+              
+              <div wire:loading wire:target="form.proof_file" class="text-info mt-2">
+                <i class="bi bi-cloud-upload"></i> Uploading...
+              </div>
 
               @error('form.proof_file')
                 <div class="invalid-feedback d-block">{{ $message }}</div>
